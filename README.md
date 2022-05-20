@@ -21,9 +21,18 @@ finally the code-email.py program willsend to the doctor the excel file whenever
 
 for now, to test the codes sent, you can fill the excel table presence with random values in the status(present or absent) for the date of today(or whatever date you are running the code on). to do so, make sure that all the files are in the same folder (directory) and run code-names then code-presence. the chart should fill with the ids in the first column, full name in second and on the third the date on top and the status of each student(randomly chosen)
 
-you can open the ocr and try it with any latin caracter card or document. (it might give an errror the code is not done yet)
+you can open the ocr and try it with any latin caracter card or document. (it might give an errror the code is not done yet) you will notice there ocr2 and ocr1. you can try both of them, the ocr2 should be our final version but we are still encoutering some minor errors.
+
 
 you can run the code-email to send an email to anyone, just follow the instructions(dont worry, we will not use your password anywhere, unless you give us bad grades :))
+
+please make sure that all these libraries are downloaded:
+
+opencv2(pip install opencv-python)
+pandas(pip)
+matplotlib(pip)
+smtplib(pip)
+pytesseract(https://github.com/UB-Mannheim/tesseract/wiki)
 
 we hope you do like the project and the work we put into it.
 
