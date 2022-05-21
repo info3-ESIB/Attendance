@@ -6,7 +6,7 @@ date=dt.date.today().strftime('%d-%B-%Y')
 
 df=pd.read_excel('presence.xlsx')
 
-l=['Present','abscent']
+l=['Present','Abscent']
 i=0
 Status=[]
 while i<len(df['Matricule']):
