@@ -11,9 +11,11 @@ port = 465
 
 from_addr = "infotrois2022@gmail.com" 
 password =  "Info32022"
-to_addr = input("Enter the recever's email address : ") 
+to_addr = input("Enter the receiver's email address : ") 
 subject = input("What is the subject of the email: ")
 content = input("Type your email here: ")
+FileName=input("Type your file here. Make sure to have the file in the same directory as this code and do not forget the extension:  ")
+print("If the email does not appear in your inbox, please check your junk/spam")
 
 msg = MIMEMultipart()
 msg['From'] = from_addr
@@ -24,9 +26,9 @@ body = MIMEText(content, 'plain')
 msg.attach(body)
 
 part = MIMEBase('application', "octet-stream")
-part.set_payload(open("presence.xlsx", "rb").read())
+part.set_payload(open(FileName, "rb").read())
 encoders.encode_base64(part)
-part.add_header('Content-Disposition', 'attachment; filename="presence.xlsx"')
+part.add_header('Content-Disposition', f'attachment; filename={FileName}')
 msg.attach(part)
 
 context = ssl.create_default_context()
