@@ -1,13 +1,36 @@
-import smtplib
+import ssl, smtplib
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+from email.utils import formatdate
+from email import encoders
 
-server=smtplib.SMTP_SSL('smtp.gmail.com',465)
-sender_mail=input("please enter you mail here: ")
-password=input("please enter your password here: ")
 
-receiver_mail=input("Enter the mail of the person you are sending that mail to: ")
-message=input("your message here: ")
+port = 465
 
-server.login(sender_mail,password)
-server.sendmail(sender_mail,receiver_mail,message)
+from_addr = "infotrois2022@gmail.com" 
+password =  "Info32022"
+to_addr = input("Enter the recever's email address : ") 
+subject = input("What is the subject of the email: ")
+content = input("Type your email here: ")
 
-server.quit()
+msg = MIMEMultipart()
+msg['From'] = from_addr
+msg['To'] = to_addr
+msg['Subject'] = subject
+msg['Date'] = formatdate(localtime = True)
+body = MIMEText(content, 'plain')
+msg.attach(body)
+
+part = MIMEBase('application', "octet-stream")
+part.set_payload(open("presence.xlsx", "rb").read())
+encoders.encode_base64(part)
+part.add_header('Content-Disposition', 'attachment; filename="presence.xlsx"')
+msg.attach(part)
+
+context = ssl.create_default_context()
+with smtplib.SMTP_SSL ("smtp.gmail.com", port,context=context) as server:
+    server.login(from_addr,password)
+    server.send_message(msg,from_addr, to_addr)
+
